@@ -1,0 +1,1 @@
+web: gunicorn recommendation-smores:app --timeout 1200

@@ -32,14 +32,17 @@ def customer_recomendation():
 s3 = boto3.client(
     's3',
     # Hard coded strings as credentials, not recommended.
-    aws_access_key_id=os.environ.get('AWS_KEY'),
-    aws_secret_access_key= os.environ.get('AWS_SECRET')
+    # aws_access_key_id=os.environ.get('AWS_KEY'),
+    # aws_secret_access_key= os.environ.get('AWS_SECRET')
+    aws_access_key_id = 'AKIAW4X7O7XB2J2LDMES',
+    aws_secret_access_key = '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',
+    region_name='us-west-2'
 )
 
 ##Load Data
 #List of 1000 users
 s3.download_file(bucketName, 'recommend_1.csv', 'data/recommend_1.csv')
-s3.download_file(bucketName, 'trx_data.csv', 'data/trx_data.csv')
+s3.download_file(bucketName, 'trx_data_copy.csv', 'data/trx_data.csv')
 customers = pd.read_csv('data/recommend_1.csv')
 #comsisting of user transactions
 transactions = pd.read_csv('data/trx_data.csv')
@@ -78,7 +81,7 @@ def create_output(model, users_to_recommend, n_rec, print_csv=True):
     return df_output
 
 # break down each list of items in the products column into rows and count the number of products bought by a user
-transactions['products'] = transactions['products'].apply(lambda x: [int(i) for i in x.split('|')])
+transactions['products'] = transactions['products'].apply(lambda x: [(i) for i in x.split('|')])
 transactions.head(2).set_index('customerId')['products'].apply(pd.Series).reset_index()
 
 # organize a given table into a dataframe with customerId, single productId, and purchase count
@@ -105,7 +108,7 @@ data = pd.melt(transactions.set_index('customerId')['products'].apply(pd.Series)
     .rename(columns={'products': 'purchase_count'}) \
     .reset_index() \
     .rename(columns={'products': 'productId'})
-data['productId'] = data['productId'].astype(np.int64)
+data['productId'] = data['productId']
 
 # print(data.shape)
 # data.head()

@@ -22,7 +22,7 @@ def index():
 @app.route('/search', methods=['GET'])
 # Per each customer
 def customer_recomendation():
-    customer_id = int(request.args['id'])
+    customer_id = (request.args['id'])
 
     if customer_id not in df_output.index:
         print('Customer not found.')

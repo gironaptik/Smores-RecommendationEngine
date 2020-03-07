@@ -12,7 +12,6 @@ import boto3
 bucketName = 'smores-recommendation-engine'
 sys.path.append("..")
 
-
 app = Flask(__name__)
 
 @app.route('/')

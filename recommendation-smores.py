@@ -31,10 +31,8 @@ def customer_recomendation():
 s3 = boto3.client(
     's3',
     # Hard coded strings as credentials, not recommended.
-    # aws_access_key_id=os.environ.get('AWS_KEY'),
-    # aws_secret_access_key= os.environ.get('AWS_SECRET')
-    aws_access_key_id = 'AKIAW4X7O7XB2J2LDMES',
-    aws_secret_access_key = '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',
+    aws_access_key_id=os.environ.get('AWS_KEY'),
+    aws_secret_access_key= os.environ.get('AWS_SECRET'),
     region_name='us-west-2'
 )
 

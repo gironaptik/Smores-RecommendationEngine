@@ -14,7 +14,6 @@ sys.path.append("..")
 
 app = Flask(__name__)
 
-
 @app.route('/')
 def index():
     return '<h1>Smores Recommendation Engine</h1>'
